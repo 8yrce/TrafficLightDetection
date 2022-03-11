@@ -1,0 +1,44 @@
+Traffic light detection is a software that allows a user to pass in images and receive environmental data regarding
+any traffic lights states as well as locations.
+
+The intended use for this software is as an autonomous driving aid
+
+Project Overview:
+
+TrafficLightDetector - handles inferencing data with the model
+    class TrafficLightDetector
+        __init__( model_path:string )
+        __load_model
+            Load our model, check for exceptions, print summary
+        inference_model( inference_data:np.array )
+            Use model for real world inferencing
+
+TrafficLightTrainer - trains a model to passed in traffic light data
+    class TrafficLightTrainer
+        __init__( model_name:string, dataHandler:DataHandler )
+            self.model = None
+            self.model_name = model_name
+            self.dataHandler = dataHandler
+        __create_network
+            Specify the network architecture, compile
+            input_layer.shape = dataHandler[0].shape
+            output_layer.shape = len(dataHandler.get_classes())
+        __train_model
+            Train the spec'ed network so it's fit on the data
+        evaluate_model( eval_data:np.array )
+            Test models performance on a given eval dataset
+
+Data - Folder containing all of our Data bits
+    DataHandler - wrangles our data into a friendly and easily controllable package
+        class DataHandler
+            __init__(target_size = (300,300), ttv_split = [.7, .2, .1], data_path="Data/")
+                self.images, self.labels = [],[]
+            __load_data()
+                Take our data into an ML friendly format
+            get_classes()
+                Returns the classes present in our dataset
+
+    Images - Folder to hold our images, place all images here
+    Labels - Folder to hold our labels, place all labels here
+
+Example - test program to show the capabilities of the tool kit including training and inferencing the model
