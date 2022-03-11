@@ -13,9 +13,9 @@ import tensorflow as tf
 # project imports
 from Data.DataHandler import DataHandler
 
-
 class TrafficLightTrainer:
     def __init__(self, model_name: str = "TrafficLightDetectionModel.h5"):
         pass
+
 
 
